@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ポケモンスリープ 詳細評価ツール ver1.6.0</title>
+<title>ポケモンスリープ 詳細評価ツール ver1.6.1</title>
 
 <style>
   body {
@@ -59,10 +59,100 @@
     font-size: 16px;
   }
 
-.autocomplete-wrapper {
-  position: relative;
-  width: 100%;
+/* 固定ヘッダー */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: #4CAF50;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 2000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
+
+.menu-icon {
+  font-size: 28px;
+  cursor: pointer;
+  margin-right: 16px;
+}
+
+.header-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* 右からスライドするメニュー */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -260px; /* 初期は隠す */
+  width: 260px;
+  height: 100%;
+  background: #e8f5e9; /* 薄い緑 */
+  box-shadow: -2px 0 6px rgba(0,0,0,0.2);
+  padding-top: 60px;
+  transition: right 0.3s ease;
+  z-index: 2500;
+  border-radius: 12px 0 0 12px;
+}
+
+.side-menu.open {
+  right: 0;
+}
+
+.side-menu a {
+  display: block;
+  padding: 16px;
+  font-size: 18px;
+  color: #2e7d32;
+  text-decoration: none;
+  border-bottom: 1px solid #c8e6c9;
+}
+
+.side-menu a:hover {
+  background: #c8e6c9;
+}
+
+/* メニューのタイトル */
+.menu-header {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 16px;
+  color: #1b5e20;
+  border-bottom: 2px solid #a5d6a7;
+}
+
+/* メニュー展開時の背景 */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  z-index: 2400;
+}
+
+  .overlay.show {
+    display: block;
+  }
+
+  /* ヘッダー分の余白を確保 */
+  body {
+    padding-top: 30px;
+  }
+
+  .autocomplete-wrapper {
+    position: relative;
+    width: 100%;
+  }
 
   .autocomplete-list {
     position: absolute; /* 検索欄の下に固定 */
@@ -170,7 +260,24 @@
 
 <body>
 
-<h1>ポケモンスリープ 詳細評価ツール ver1.6.0</h1>
+<!-- 固定ヘッダー -->
+<header class="header">
+  <div class="header-title">Pokèmon Sleep Tools</div>
+  <div class="menu-icon" id="menuBtn">☰</div>
+</header>
+
+<!-- スライドメニュー -->
+<nav class="side-menu" id="sideMenu">
+  <div class="menu-header">メニュー</div>
+  <a href="../single/index.html">単体評価ツール</a>
+  <a href="../compare/index.html">比較評価ツール</a>
+  <a href="https://penape-00.github.io/Penape_PokeSle_EXP_ver1.0.0/">Exp計算機</a>
+</nav>
+
+<!-- メニュー展開時の背景 -->
+<div class="overlay" id="overlay"></div>
+
+<h1>ポケモンスリープ 詳細評価ツール ver1.6.1</h1>
 
 <!-- ==================================================
      ▼ 基本情報
@@ -673,6 +780,22 @@ function clearSettings() {
      ▼ ロジック（最後に読み込む）
 ================================================== -->
 <script src="script.js"></script>
+
+<script>
+  const menuBtn = document.getElementById("menuBtn");
+  const sideMenu = document.getElementById("sideMenu");
+  const overlay = document.getElementById("overlay");
+
+  menuBtn.addEventListener("click", () => {
+    sideMenu.classList.add("open");
+    overlay.classList.add("show");
+  });
+
+  overlay.addEventListener("click", () => {
+    sideMenu.classList.remove("open");
+    overlay.classList.remove("show");
+  });
+</script>
 
 </body>
 </html>
