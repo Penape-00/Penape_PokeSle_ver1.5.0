@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ポケモンスリープ 詳細評価ツール ver1.6.2</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="src_detail/detail.css">
+</head>
+
+<body>
+
+<!-- ▼ 固定ヘッダー -->
+<header class="header">
+  <div class="header-title">Pokémon Sleep Tools</div>
+  <div class="menu-icon" id="menuBtn">☰</div>
+</header>
+
+<!-- ▼ スライドメニュー -->
+<nav class="side-menu" id="sideMenu">
+  <div class="menu-header">メニュー</div>
+
+  <a href="detail.html">詳細評価</a>
+  <a href="compare.html">比較評価</a>
+  <a href="exp.html">Exp計算機</a>
+
+  <div class="menu-bottom">
+    <a href="../index.html">トップページ</a>
+  </div>
+</nav>
+
+<!-- ▼ メニュー展開時の背景 -->
+<div class="overlay" id="overlay"></div>
+
+<h1>ポケモンスリープ 詳細評価ツール ver1.6.2</h1>
+
+<!-- ==================================================
+     ▼ 基本情報
+================================================== -->
+<section class="section-block">
+  <h2>基本情報</h2>
+
+  <div class="row">
+    <div class="field">
+      <label>タイプ</label>
+      <select id="typeSelect">
+        <option value="">選択してください</option>
+        <option value="ノーマル">ノーマル</option>
+        <option value="ほのお">ほのお</option>
+        <option value="みず">みず</option>
+        <option value="でんき">でんき</option>
+        <option value="くさ">くさ</option>
+        <option value="こおり">こおり</option>
+        <option value="かくとう">かくとう</option>
+        <option value="どく">どく</option>
+        <option value="じめん">じめん</option>
+        <option value="ひこう">ひこう</option>
+        <option value="エスパー">エスパー</option>
+        <option value="むし">むし</option>
+        <option value="いわ">いわ</option>
+        <option value="ゴースト">ゴースト</option>
+        <option value="ドラゴン">ドラゴン</option>
+        <option value="あく">あく</option>
+        <option value="はがね">はがね</option>
+        <option value="フェアリー">フェアリー</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>ポケモン</label>
+      <select id="pokemonSelect">
+        <option value="">選択してください</option>
+      </select>
+    </div>
+
+    <div class="field autocomplete-wrapper">
+      <label>ポケモン名で検索</label>
+      <input type="text" id="pokemonSearch" placeholder="例：か、ピカ、リザ…">
+      <div id="autocompleteList" class="autocomplete-list"></div>
+    </div>
+
+    <div class="field">
+      <label>レベル</label>
+      <input type="number" id="level" value="65" min="1" max="100">
+    </div>
+  </div>
+
+  <!-- ==================================================
+       ▼ 食材構成
+  ================================================== -->
+  <h2>食材構成</h2>
+
+  <div class="row">
+    <div class="field">
+      <label>Lv1 食材</label>
+      <select id="ingredientLv1">
+        <option value="">ポケモンを選択してください</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Lv30 食材</label>
+      <select id="ingredientLv30">
+        <option value="">ポケモンを選択してください</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Lv60 食材</label>
+      <select id="ingredientLv60">
+        <option value="">ポケモンを選択してください</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- ==================================================
+       ▼ 性格・サブスキル
+  ================================================== -->
+  <h2>性格・サブスキル</h2>
+
+  <div class="row">
+    <div class="field">
+      <label>性格</label>
+      <select id="natureSelect">
+        <!-- 初期値は detail.js で hardy に設定 -->
+        <option value="hardy">がんばりや（無補正）</option>
+        <option value="lonely">さみしがり（おてスピ up / げんき down）</option>
+        <option value="brave">ゆうかん（おてスピ up / Ｅｘｐ down）</option>
+        <option value="adamant">いじっぱり（おてスピ up / 食材 down）</option>
+        <option value="naughty">やんちゃ（おてスピ up / スキル down）</option>
+        <option value="bold">ずぶとい（げんき up / おてスピ down）</option>
+        <option value="docile">すなお（無補正）</option>
+        <option value="relaxed">のんき（げんき up / Ｅｘｐ down）</option>
+        <option value="impish">わんぱく（げんき up / 食材 down）</option>
+        <option value="lax">のうてんき（げんき up / スキル down）</option>
+        <option value="timid">おくびょう（Ｅｘｐ up / おてスピ down）</option>
+        <option value="hasty">せっかち（Ｅｘｐ up / げんき down）</option>
+        <option value="serious">まじめ（無補正）</option>
+        <option value="jolly">ようき（Ｅｘｐ up / 食材 down）</option>
+        <option value="naive">むじゃき（Ｅｘｐ up / スキル down）</option>
+        <option value="modest">ひかえめ（食材 up / おてスピ down）</option>
+        <option value="mild">おっとり（食材 up / げんき down）</option>
+        <option value="quiet">れいせい（食材 up / Ｅｘｐ down）</option>
+        <option value="bashful">てれや（無補正）</option>
+        <option value="rash">うっかりや（食材 up / スキル down）</option>
+        <option value="calm">おだやか（スキル up / おてスピ down）</option>
+        <option value="gentle">おとなしい（スキル up / げんき down）</option>
+        <option value="sassy">なまいき（スキル up / Ｅｘｐ down）</option>
+        <option value="careful">しんちょう（スキル up / 食材 down）</option>
+        <option value="quirky">きまぐれ（無補正）</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>サブスキル：おてスピ</label>
+      <select id="subskillSpeed">
+        <option value="0">なし</option>
+        <option value="0.07">S</option>
+        <option value="0.14">M</option>
+        <option value="0.21">S+M</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>おてボ合計数</label>
+      <select id="teamBonus">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="field">
+      <label>サブスキル：食材確率</label>
+      <select id="subskillIngredient">
+        <option value="0">なし</option>
+        <option value="0.18">S</option>
+        <option value="0.36">M</option>
+        <option value="0.54">S+M</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>サブスキル：スキル確率</label>
+      <select id="subskillSkill">
+        <option value="0">なし</option>
+        <option value="0.18">S</option>
+        <option value="0.36">M</option>
+        <option value="0.54">S+M</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>サブスキル：きのみ数</label>
+      <select id="berryCountSkill">
+        <option value="0">無</option>
+        <option value="1">有</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- ==================================================
+       ▼ フィールド・キャンプ
+  ================================================== -->
+  <h2>フィールド・キャンプ</h2>
+
+  <div class="row">
+    <div class="field">
+      <label>フィールドボーナス (%)</label>
+      <input type="number" id="fieldBonus" value="75" min="0" max="85">
+    </div>
+
+    <div class="field">
+      <label>フィールド適正</label>
+      <select id="fieldBerryBonus">
+        <option value="1">非該当</option>
+        <option value="2">該当</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>いいキャンプチケット</label>
+      <select id="campTicket">
+        <option value="1">不使用</option>
+        <option value="1.2">使用</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- ==================================================
+       ▼ EXモード
+  ================================================== -->
+  <h2>EXモード</h2>
+
+  <div class="row">
+    <div class="field">
+      <label>EX適正</label>
+      <select id="EXtype">
+        <option value="no">-</option>
+        <option value="main">メイン適正</option>
+        <option value="sub">サブ適正</option>
+        <option value="none">非適正</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>EXボーナス</label>
+      <select id="EXBonus">
+        <option value="no">-</option>
+        <option value="exberry">きのみ</option>
+        <option value="exingredient">食材</option>
+        <option value="exskill">スキル</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="button-row">
+    <button id="calcBtn" class="btn-calc">計算する</button>
+    <button id="clearBtn" class="btn-clear">設定をクリア</button>
+  </div>
+</section>
+
+<!-- ==================================================
+     ▼ 結果表示
+================================================== -->
+<section class="section-block results">
+  <h2>結果</h2>
+  <div id="summary"></div>
+  <div id="tableArea"></div>
+</section>
+
+<!-- ==================================================
+     ▼ データファイル
+================================================== -->
+<script src="src_detail/pokemonData.js"></script>
+<script src="src_detail/ingredientOptions.js"></script>
+<script src="src_detail/ingredientCounts.js"></script>
+<script src="src_detail/ingredientEnergy.js"></script>
+<script src="src_detail/natureData.js"></script>
+
+<!-- ==================================================
+     ▼ ロジック
+================================================== -->
+<script src="src_detail/calc.js"></script>
+<script src="src_detail/detail.js"></script>
+
+</body>
+</html>
