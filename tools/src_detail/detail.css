@@ -1,0 +1,275 @@
+/* ================================
+   全体設定
+================================ */
+body {
+  font-family: sans-serif;
+  background: #a9a9a9;
+  margin: 0;
+  padding: 16px;
+  padding-top: 30px; /* 固定ヘッダー分の余白 */
+  color: #222;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+h2 {
+  margin: 0 0 12px 0;
+  font-size: 20px;
+  border-left: 6px solid #4CAF50;
+  padding-left: 8px;
+}
+
+/* ================================
+   セクション
+================================ */
+.section-block {
+  background: #f5f5f5;
+  padding: 16px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.field {
+  flex: 1 1 220px;
+  min-width: 220px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+select,
+input,
+button {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+/* ================================
+   固定ヘッダー
+================================ */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: #4CAF50;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 2000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.menu-icon {
+  font-size: 28px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.header-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* ================================
+   スライドメニュー
+================================ */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -220px;
+  width: 220px;
+  height: 100%;
+  background: #e8f5e9;
+  box-shadow: -2px 0 6px rgba(0,0,0,0.2);
+  padding-top: 30px;
+  transition: right 0.3s ease;
+  z-index: 2500;
+  border-radius: 12px 0 0 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-menu.open {
+  right: 0;
+}
+
+.side-menu a {
+  display: block;
+  padding: 14px;
+  font-size: 16px;
+  color: #2e7d32;
+  text-decoration: none;
+  border-bottom: 1px solid #c8e6c9;
+}
+
+.side-menu a:hover {
+  background: #c8e6c9;
+}
+
+.menu-header {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 16px;
+  color: #1b5e20;
+  border-bottom: 2px solid #a5d6a7;
+}
+
+.side-menu .menu-bottom {
+  margin-top: auto;
+  border-top: 2px solid #a5d6a7;
+  padding: 16px;
+}
+
+.side-menu .menu-bottom a {
+  font-size: 16px;
+  font-weight: bold;
+  color: #1b5e20;
+}
+
+/* メニュー展開時の背景 */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  z-index: 2400;
+}
+
+.overlay.show {
+  display: block;
+}
+
+/* ================================
+   オートコンプリート
+================================ */
+.autocomplete-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.autocomplete-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 4px;
+  max-height: 240px;
+  overflow-y: auto;
+  display: none;
+  z-index: 1000;
+}
+
+.autocomplete-item {
+  padding: 14px;
+  font-size: 18px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.autocomplete-item:last-child {
+  border-bottom: none;
+}
+
+.autocomplete-item:hover {
+  background: #e8f5e9;
+}
+
+/* ================================
+   ボタン
+================================ */
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.btn-calc,
+.btn-clear {
+  flex: 1;
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-calc {
+  background: #4CAF50;
+  color: #fff;
+}
+
+.btn-calc:hover {
+  background: #43a047;
+}
+
+.btn-clear {
+  background: #d9534f;
+  color: #fff;
+}
+
+.btn-clear:hover {
+  background: #c9302c;
+}
+
+/* ================================
+   結果表示
+================================ */
+.results {
+  background: #dcdcdc;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  background: #fff;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  text-align: center;
+}
+
+th {
+  background: #666;
+  color: #fff;
+}
+
+/* ================================
+   スマホ対応
+================================ */
+@media (max-width: 480px) {
+  .field {
+    min-width: 100%;
+  }
+}
